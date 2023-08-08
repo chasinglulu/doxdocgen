@@ -322,6 +322,7 @@ export default class CppParser implements ICodeParser {
         } catch (err) {
             // console.dir(err);
         }
+        console.log(line);
         const templateArgs: string[] = [];
         let args: [CppArgument, CppArgument[]] = [new CppArgument(), []];
 
@@ -362,6 +363,8 @@ export default class CppParser implements ICodeParser {
                 if (this.casingType !== CasingType.uncertain) {
                     this.specialCase = SpecialCase.factoryMethod;
                 }
+            } else {
+                this.casingType = CppParser.checkCasing(methodName,0);
             }
         }
 
@@ -387,6 +390,7 @@ export default class CppParser implements ICodeParser {
 
         let nextLine: Position = new Position(this.activeSelection.line + 1, this.activeSelection.character);
 
+        console.log(this.activeSelection.line, this.activeSelection.character);
         let nextLineTxt: string = this.activeEditor.document.lineAt(nextLine.line).text.trim();
 
         // VSCode may enter a * on itself, we don't want that in our method
@@ -402,6 +406,7 @@ export default class CppParser implements ICodeParser {
         while (linesToGet-- > 0) { // Check for end of expression.
             nextLine = new Position(nextLine.line + 1, nextLine.character);
             nextLineTxt = this.activeEditor.document.lineAt(nextLine.line).text.trim();
+            console.log(linesToGet, ": ", nextLineTxt);
             let finalSlice = -1;
 
             // Check if method has finished if curly brace is opened while

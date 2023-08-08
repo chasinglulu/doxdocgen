@@ -1,9 +1,9 @@
 {
-  "name": "doxdocgen",
-  "displayName": "Doxygen Documentation Generator",
+  "name": "ax-doxdocgen",
+  "displayName": "Axera Doxygen Documentation Generator",
   "description": "Let me generate Doxygen documentation from your source code for you.",
-  "version": "1.4.0",
-  "publisher": "cschlosser",
+  "version": "1.4.1",
+  "publisher": "wangxinlu",
   "engines": {
     "vscode": "^1.55.0"
   },

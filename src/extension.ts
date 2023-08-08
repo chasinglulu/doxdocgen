@@ -29,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
     if (vscode.workspace.getConfiguration("doxdocgen.generic").get<boolean>("commandSuggestion")) {
         // tslint:disable-next-line: max-line-length
         vscode.languages.registerCompletionItemProvider({ language: "cpp", scheme: "file" }, new DoxygenCompletionItemProvider(), "@", "\\");
+        vscode.languages.registerCompletionItemProvider({ language: "c", scheme: "file" }, new DoxygenCompletionItemProvider(), "@", "\\");
     }
 
     // After the CompletionItemProvider is registered, it cannot be unregistered

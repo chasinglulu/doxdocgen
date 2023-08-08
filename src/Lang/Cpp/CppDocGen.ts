@@ -169,7 +169,7 @@ export class CppDocGen implements IDocGen {
             }
             case SpecialCase.none:
             default: {
-                return "";
+                return this.splitCasing(this.func.name.trim()).trim();
             }
         }
         const str = templates.getTemplatedString(text, { toReplace: this.cfg.nameTemplateReplace, with: val });
@@ -178,10 +178,12 @@ export class CppDocGen implements IDocGen {
     }
 
     protected generateBrief(lines: string[]) {
+        let str: string = templates.getTemplatedString(this.cfg.Generic.briefTemplate,
+                { toReplace: this.cfg.textTemplateReplace, with: this.getSmartText() });
         lines.push(
             ...templates.getTemplatedString(
-                this.cfg.Generic.briefTemplate,
-                { toReplace: this.cfg.textTemplateReplace, with: this.getSmartText() },
+                str,
+                { toReplace: this.cfg.nameTemplateReplace, with: this.func.name.trim() },
             ).split("\n"),
         );
     }
